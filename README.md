@@ -30,16 +30,22 @@ Install the python dependencies
 ```
 $ pip install -r requirements.txt
 ```
+Create worksheet in Google Docs and delete all rows except the first. Label the columns Date, Temperature and Humidity
+
 Enter your Google username and password into environment.py
 ```
 email       = 'email@gmail.com'
 password    = 'password'
 spreadsheet = 'worksheet'
 ```
+
 Run incubator.py
 ```
 sudo python incubator.py
 ```
 
 ## Example
+### LCD stats
 ![lcd](https://raw.github.com/ironchief/Hera/master/lcd.png "")
+### Embeddable Google Doc Charts
+![lcd](https://raw.github.com/ironchief/Hera/master/chart.png "")

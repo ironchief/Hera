@@ -19,14 +19,16 @@ def main():
     screen1.set_heartbeat("off")
     screen1.set_duration(5)
 
+    # lcd strings
     door_status = "shut"
     temperature = "37"+chr(223)+"C"
     humidity = "80% RH"
     network = "wifi"
 
+    # lcd widgets
     display_temperature = screen1.add_string_widget("MyTempWidget", text=temperature, x=1, y=1)
     display_humidity = screen1.add_string_widget("MyHumiWidget", text=humidity, x=1, y=2)
-    display_network = screen1.add_string_widget("MyNetworkWidget", text=network, x=13, y=1)
+    display_network = screen1.add_string_widget("MyNetworkWidget", text=network, x=10, y=1)
     display_alarm = screen1.add_string_widget("MyStringWidget", text=door_status, x=13, y=2)
 
     while True:
@@ -35,12 +37,6 @@ def main():
             door_status = "open"
         else:
             door_status = "shut"
-
-        # get network status
-        if internet_on():
-            network = "wifi"
-        else:
-            network = "DISC"
 
         # get temperature and humidity status
         # output = subprocess.check_output(["./Adafruit_DHT", "2302", str(temp_pin)]);
@@ -51,7 +47,14 @@ def main():
         #     humidity = float(matches_hum.group(1))
         #     display_temperature.set_text(str(temp)+chr(223)+"C")
         #     display_humidity.set_text(str(humidity)+"% RH")
+        # Append the data in the spreadsheet, including a timestamp
+        # get network status
 
+        if internet_on():
+            network = "   wifi"
+        else:
+            network = "no wifi"
+      
         display_network.set_text(network)
         display_alarm.set_text(door_status)
         time.sleep(3)

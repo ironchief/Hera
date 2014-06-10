@@ -50,18 +50,16 @@ def main():
             door_status = "shut"
 
         # get temperature and humidity status
-        # output = subprocess.check_output(["./Adafruit_DHT", "2302", str(temp_pin)]);
-        temp = uniform( 36, 37)
-        hum = uniform( 75, 80)
-        output = "Temp = %.1f *C, Hum = %.1f %%" % (temp, hum)
-        matches_temp = re.search("Temp =\s+([0-9.]+)", output)
-        matches_hum = re.search("Hum =\s+([0-9.]+)", output)
-        if matches_temp and matches_hum:
+        output = subprocess.check_output(["Adafruit-Raspberry-Pi-Python-Code/Adafruit_DHT_Driver/Adafruit_DHT", "2302", str(temp_pin)]);
+        # matches_temp, matches_hum = uniform( 36, 37), uniform( 75, 80)
+        try:
+            matches_temp = re.search("Temp =\s+([0-9.]+)", output)
+            matches_hum = re.search("Hum =\s+([0-9.]+)", output)
             temperature = float(matches_temp.group(1))
             humidity = float(matches_hum.group(1))
             temperature_status = str(temperature)+chr(223)+"C"
             humidity_status = str(humidity)+"% RH"
-        else:
+        except:
             temperature_status = "--.-C"
             humidity_status = "--.-% RH"
 
@@ -82,7 +80,7 @@ def main():
         display_humidity.set_text(humidity_status)
         display_network.set_text(network_status)
         display_alarm.set_text(door_status)
-        time.sleep(3)
+        time.sleep(10)
 
 def internet_on():
     try:

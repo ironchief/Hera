@@ -58,10 +58,10 @@ def main():
             temperature = float(matches_temp.group(1))
             humidity = float(matches_hum.group(1))
             temperature_status = str(temperature)+chr(223)+"C"
-            humidity_status = str(humidity)+"% RH"
+            humidity_status = str(humidity)+"%RH"
         except:
-            temperature_status = "--.-C"
-            humidity_status = "--.-% RH"
+            temperature_status = "--.-"+chr(223)+"C"
+            humidity_status = "--.-%RH"
 
 
         # get network status
